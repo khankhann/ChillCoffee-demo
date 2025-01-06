@@ -2,62 +2,62 @@ var arrItem = [
   {
     name: "nước cam",
     image: "image/nuoccam.jpg",
-    price: 30000,
+    price: 20000,
   },
   {
     name: "nước dừa",
     image: "image/nuocdua.jpg",
-    price: 30000,
+    price: 20000,
   },
   {
     name: "nước ép táo",
     image: "image/nuoctao.jpg",
-    price: 30000,
+    price: 28000,
   },
   {
     name: "nước ép thơm",
     image: "image/nuocthom.jpg",
-    price: 30000,
+    price: 28000,
   },
   {
     name: "cà phê đen",
     image: "image/capheden.jpg",
-    price: 30000,
+    price: 18000,
   },
   {
     name: "bạc sĩu",
     image: "image/bacsiu.jpg",
-    price: 30000,
+    price: 28000,
   },
   {
     name: "cà phê sữa",
     image: "image/caphesua.jpg",
-    price: 30000,
+    price: 28000,
   },
   {
     name: "trà sữa chân trâu",
     image: "image/trasuachantrau.jpg",
-    price: 30000,
+    price: 35000,
   },
   {
     name: "trà sữa truyền thống",
     image: "image/trasuatruyenthongdailoan.png",
-    price: 30000,
+    price: 32000,
   },
   {
     name: "trà đào",
     image: "image/tradao.jpg",
-    price: 30000,
+    price: 35000,
   },
   {
     name: "sữa tươi chân trâu",
     image: "image/suatuoichanchau.jpg",
-    price: 30000,
+    price: 45000,
   },
   {
     name: "matcha latte",
     image: "image/matchaLatte.jpg",
-    price: 30000,
+    price: 45000,
   },
   {
     name: "matcha đá xay",
@@ -67,12 +67,12 @@ var arrItem = [
   {
     name: "capuchino",
     image: "image/capuchino.jpg",
-    price: 30000,
+    price: 40000,
   },
   {
     name: "milo dầm",
     image: "image/milodam.png",
-    price: 30000,
+    price: 35000,
   },
   {
     name: "trà trái cây",
@@ -87,17 +87,17 @@ var arrItem = [
   {
     name: "bánh tiramisu",
     image: "image/banhtiramisu.jpg",
-    price: 30000,
+    price: 32000,
   },
   {
     name: "bánh mango cheese",
     image: "image/mangocheesecake.jpg",
-    price: 30000,
+    price: 38000,
   },
   {
     name: "bánh sừng bò",
     image: "image/banhsungbo.jpg",
-    price: 30000,
+    price: 28000,
   },
   {
     name: "bánh eclair ",
@@ -107,12 +107,12 @@ var arrItem = [
   {
     name: "bánh kouign",
     image: "image/banhkouign.jpg",
-    price: 30000,
+    price: 40000,
   },
   {
     name: "bánh opera",
     image: "image/banhopera.jpg",
-    price: 30000,
+    price: 40000,
   },
   {
     name: "bánh paris",
@@ -122,22 +122,22 @@ var arrItem = [
   {
     name: "bánh mille",
     image: "image/banhmille.jpg",
-    price: 30000,
+    price: 35000,
   },
   {
     name: "bánh religieuse",
     image: "image/banhreligieuse.jpg",
-    price: 30000,
+    price: 35000,
   },
   {
     name: "bánh saint",
     image: "image/banhsaint.jpg",
-    price: 30000,
+    price: 40000,
   },
   {
     name: "bánh tarte",
     image: "image/banhtarte.jpg",
-    price: 30000,
+    price: 42000,
   },
 ];
 
@@ -184,7 +184,7 @@ function loadProduct(arrItem) {
             <p> </p>
             <div class="in-text">
                 <div class="price">
-                    <h6>${product.price}</h6>
+                    <h6>${product.price.toLocaleString("vi-VN")}VNĐ</h6>
                 </div>
                 <div class="s-btn add-to-cart">
                     <button 
@@ -204,6 +204,46 @@ function loadProduct(arrItem) {
   shopContent.innerHTML = html;
 }
 
+function tabUI() {
+  const tabs = document.querySelectorAll(".tabitem");
+  const sections = document.querySelectorAll("section"); // Các section tương ứng với tabitem
+  const $ = document.querySelector.bind(document);
+
+  // Lắng nghe sự kiện scroll
+  window.addEventListener("scroll", () => {
+    let currentIndex = 0;
+
+    // Duyệt qua các sections để tìm vị trí hiện tại
+    sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop; // Điều chỉnh offset nếu cần
+      const sectionHeight = section.offsetHeight;
+
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        currentIndex = index;
+      }
+    });
+
+    // Cập nhật trạng thái active của tab
+    $(".tabitem.active").classList.remove("active");
+    tabs[currentIndex].classList.add("active");
+  });
+
+  // Sự kiện click tab
+  tabs.forEach((tab, index) => {
+    tab.onclick = () => {
+      $(".tabitem.active").classList.remove("active");
+      tab.classList.add("active");
+
+      // Cuộn tới section tương ứng
+      sections[index].scrollIntoView({ behavior: "smooth" });
+    };
+  });
+}
+tabUI();
+
 loadProduct(arrItem);
 
 function loadInfoMember(arrMember) {
@@ -215,7 +255,7 @@ function loadInfoMember(arrMember) {
         <img src="${info.image}" alt="Walter White">
         <div class="social">
           <a href="#"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.facebook.com/khangeward/"><i class="fa-brands fa-facebook"></i></a>
           <a href="#"><i class="fa-brands fa-instagram"></i></a>
           <a href="#"><i class="fa-brands fa-linkedin"></i></a>
         </div>
@@ -267,7 +307,7 @@ function displayCart() {
       item.name
     }" style="width: 50px; height: 50px; margin-right: 10px;">
                 <div>
-                    <p>${item.name} - ${item.price.toLocaleString()} VND 
+                    <p>${item.name} - ${item.price.toLocaleString("vi-VN")} VND 
                         <input type="number" class="update-quantity" data-name="${
                           item.name
                         }" value="${
@@ -285,7 +325,9 @@ function displayCart() {
 
   // Thêm tổng số tiền
   const totalElement = document.createElement("div");
-  totalElement.innerHTML = `<p><strong>Tổng tiền:</strong> ${totalPrice.toLocaleString()} VND</p>`;
+  totalElement.innerHTML = `<p><strong>Tổng tiền:</strong>${totalPrice.toLocaleString(
+    "vi-VN"
+  )}VND</p>`;
   // totalElement.style.width = "177px";
   cartContainer.appendChild(totalElement);
 
@@ -309,36 +351,68 @@ function displayCart() {
 }
 
 // Hàm thêm sản phẩm vào giỏ hàng
+// function addToCart(product) {
+//   const existingProduct = cart.find((item) => item.name === product.name);
+//   if (existingProduct) {
+//     existingProduct.quantity += 1; // Tăng số lượng nếu sản phẩm đã tồn tại
+//   } else {
+//     cart.push(product); // Thêm sản phẩm mới
+//   }
+//   saveCart(); // Lưu lại giỏ hàng
+//   // alert(`${product.name} đã được thêm vào giỏ hàng!`);
+// }
 function addToCart(product) {
-  const existingProduct = cart.find((item) => item.name === product.name);
+  // Lấy giỏ hàng hiện tại từ localStorage
+  const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
+  const existingProduct = currentCart.find(
+    (item) => item.name === product.name
+  );
+
   if (existingProduct) {
-    existingProduct.quantity += 1; // Tăng số lượng nếu sản phẩm đã tồn tại
+    // Tăng số lượng nếu sản phẩm đã tồn tại
+    existingProduct.quantity += 1;
   } else {
-    cart.push(product); // Thêm sản phẩm mới
+    // Thêm sản phẩm mới nếu chưa tồn tại
+    currentCart.push(product);
   }
-  saveCart(); // Lưu lại giỏ hàng
-  // alert(`${product.name} đã được thêm vào giỏ hàng!`);
+
+  // Lưu lại toàn bộ giỏ hàng vào localStorage
+  localStorage.setItem("cart", JSON.stringify(currentCart));
 }
 
 // Hàm xóa sản phẩm khỏi giỏ hàng
+// function removeFromCart(productName) {
+//   cart = cart.filter((item) => item.name !== productName);
+//   saveCart();
+//   displayCart();
+// }
+
 function removeFromCart(productName) {
-  cart = cart.filter((item) => item.name !== productName);
-  saveCart();
-  displayCart();
+  const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+  const updatedCart = currentCart.filter((item) => item.name !== productName);
+
+  localStorage.setItem("cart", JSON.stringify(updatedCart)); // Cập nhật localStorage
+  displayCart(); // Cập nhật hiển thị giỏ hàng
 }
 
 // Hàm cập nhật số lượng sản phẩm
 function updateQuantity(productName, newQuantity) {
-  const product = cart.find((item) => item.name === productName);
+  const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const product = currentCart.find((item) => item.name === productName);
   if (product) {
-    product.quantity = newQuantity;
-    if (product.quantity <= 0) {
+    if (newQuantity <= 0) {
+      // Nếu số lượng <= 0, xóa sản phẩm khỏi giỏ
       removeFromCart(productName);
     } else {
-      saveCart();
+      // Cập nhật số lượng
+      product.quantity = newQuantity;
+      localStorage.setItem("cart", JSON.stringify(currentCart)); // Lưu giỏ hàng mới
     }
   }
-  displayCart();
+  displayCart(); // Cập nhật hiển thị giỏ hàng
 }
 
 // Sự kiện click icon giỏ hàng
@@ -536,6 +610,8 @@ commentForm.addEventListener("submit", (event) => {
 // Load comments when the page is loaded
 loadComments();
 
+// dùng fetch tải bình luận
+
 function toastMessage({ title, type, duration, message }) {
   const iconBox = {
     success: "fa-solid fa-check", //dat hang
@@ -544,10 +620,17 @@ function toastMessage({ title, type, duration, message }) {
   };
   const icons = iconBox[type];
   const toastBox = document.querySelector("#toast");
-  setTimeout(() => {
+
+  const autoRemove = setTimeout(() => {
     toastBox.removeChild(main);
   }, duration);
   const main = document.createElement("div");
+  main.onclick = (e) => {
+    if (e.target.closest(".toast__close")) {
+      toastBox.removeChild(main);
+      clearTimeout(autoRemove);
+    }
+  };
   main.classList.add("toast", `toast--${type}`);
   main.innerHTML = `
    
