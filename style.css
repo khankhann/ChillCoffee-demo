@@ -64,6 +64,9 @@ header{
 }
 .navlist a:hover{
 color: var(--main-color);
+
+transition: all .5s ease;
+
 }
 .navlist a.active{
 color: var(--main-color);
@@ -993,7 +996,7 @@ transition: all .5s ease;
     box-shadow: #b68035 0px 1px 10px;
 
     margin-top: 20px;
-    animation: slideleft ease 0.3s, fadeOut linear 2s 1s forwards;
+    animation: slideleft ease 0.3s, fadeOut linear 3s 1s forwards;
     /* forwards  : là dừng lai ở animation không quay lại ban đầu  */
     transition: all linear .3s;
 }
@@ -1077,4 +1080,19 @@ transition: all .5s ease;
         transform: scale(1.5);
         opacity: 0;
     }
+}
+
+
+.address{
+    display: flex;
+    flex-direction: column;
+
+}
+.address a {
+    padding: 2px;
+    color: #fff;
+}
+.address a:hover {
+    color: #d1cf4e;
+    transition: all 0.5s ease;
 }
